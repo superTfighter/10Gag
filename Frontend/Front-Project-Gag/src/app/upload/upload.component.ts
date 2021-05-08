@@ -6,7 +6,7 @@ import { stringify } from 'querystring';
 import { ActivatedRoute, Router } from '@angular/router';
 
 class ImageSnippet {
-  constructor(public src: string, public file: File) {}
+  constructor(public src: string, public file: File) { }
 }
 
 @Component({
@@ -24,18 +24,26 @@ export class UploadComponent implements OnInit {
   private http: HttpClient;
   private router: Router;
 
-  constructor(http: HttpClient, route: ActivatedRoute,router: Router) {
-
-    this.imageModel.title = "";
-    this.imageModel.base64Image = "";
-    this.imageModel.typeID = "";
+  constructor(http: HttpClient, router: Router) {
 
     this.http = http;
     this.router = router;
 
-    this.http.get<Array<ImageType>>("https://localhost:7766/imagetype").subscribe(response => {
-      this.imageTypes = response;
-    });
+    if (sessionStorage.getItem("token") == null) {
+
+      this.router.navigate(['/login']);
+
+    } else {
+
+      this.imageModel.title = "";
+      this.imageModel.base64Image = "";
+      this.imageModel.typeID = "";
+      
+      this.http.get<Array<ImageType>>("https://localhost:7766/imagetype").subscribe(response => {
+        this.imageTypes = response;
+      });
+
+    }
 
   }
 
@@ -44,20 +52,17 @@ export class UploadComponent implements OnInit {
 
   onSubmit(): void {
 
-    if(this.imageModel.title != "" && this.imageModel.base64Image != "" && this.imageModel.typeID != "")
-    {
+    if (this.imageModel.title != "" && this.imageModel.base64Image != "" && this.imageModel.typeID != "") {
       this.imageModel.rating = 1;
 
       console.log(this.imageModel);
 
       //POST TO SERVER
-      this.http.post<Image>("https://localhost:7766/image",this.imageModel).subscribe(response => 
-      {
+      this.http.post<Image>("https://localhost:7766/image", this.imageModel).subscribe(response => {
         this.router.navigate(['/']);
       });
     }
-    else
-    {
+    else {
       alert("ERROR");
     }
   }
