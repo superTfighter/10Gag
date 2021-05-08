@@ -25,10 +25,22 @@ namespace _10GAG
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
+
+
             services.AddTransient<AuthLogic, AuthLogic>();
             services.AddTransient<ImageLogic, ImageLogic>();
+            services.AddTransient<ImageTypeLogic, ImageTypeLogic>();
 
             services.AddTransient<IRepository<Image>, ImageRepository>();
+            services.AddTransient<IRepository<ImageType>, ImageTypeRepository>();
 
             services.AddDbContext<DatabaseContext>();
 
@@ -76,6 +88,8 @@ namespace _10GAG
             app.UseRouting();
 
             app.UseHttpsRedirection();
+            
+            app.UseCors("MyPolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();

@@ -7546,11 +7546,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "Z:\\Egyetem\\ASPDotNET_MVC\\MidtermProject\\Backend\\10GAG\\10GAG\\WebApi.csproj",
+      "projectUniqueName": "Z:\\Egyetem\\ASPDotNETMVC\\MidtermProject\\Backend\\10GAG\\10GAG\\WebApi.csproj",
       "projectName": "WebApi",
-      "projectPath": "Z:\\Egyetem\\ASPDotNET_MVC\\MidtermProject\\Backend\\10GAG\\10GAG\\WebApi.csproj",
+      "projectPath": "Z:\\Egyetem\\ASPDotNETMVC\\MidtermProject\\Backend\\10GAG\\10GAG\\WebApi.csproj",
       "packagesPath": "C:\\Users\\Tomi\\.nuget\\packages\\",
-      "outputPath": "Z:\\Egyetem\\ASPDotNET_MVC\\MidtermProject\\Backend\\10GAG\\10GAG\\obj\\",
+      "outputPath": "Z:\\Egyetem\\ASPDotNETMVC\\MidtermProject\\Backend\\10GAG\\10GAG\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Tomi\\AppData\\Roaming\\NuGet\\NuGet.Config",

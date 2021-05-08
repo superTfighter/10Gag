@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xP5K1eQyd5Nl3B4bV3IxE8VJajHR5f3p7jOMG2bJGpZSq5JtRnf92FgmZmKsNACqGfFhC3Ktn2v3N3LSU8zEzA==",
+  "dgSpecHash": "N1udXj6uqblh6vEXuvDv97B7xPiDfcQnLdaZjzX5uJEayIt/bX2fSvNjNDtyo+jZtqqmiMO9vw79/BAFzeYo7A==",
   "success": true,
-  "projectFilePath": "Z:\\Egyetem\\ASPDotNET_MVC\\MidtermProject\\Backend\\10GAG\\10GAG\\WebApi.csproj",
+  "projectFilePath": "Z:\\Egyetem\\ASPDotNETMVC\\MidtermProject\\Backend\\10GAG\\10GAG\\WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Tomi\\.nuget\\packages\\castle.core\\4.4.0\\castle.core.4.4.0.nupkg.sha512",
     "C:\\Users\\Tomi\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.8\\microsoft.aspnetcore.authentication.jwtbearer.3.1.8.nupkg.sha512",

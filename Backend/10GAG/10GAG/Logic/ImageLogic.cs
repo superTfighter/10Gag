@@ -25,5 +25,10 @@ namespace Logic
         {
             _imageRepository.Add(item);
         }
+
+        public void DeleteImage(string uid) 
+        {
+            _imageRepository.Delete(uid);
+        }
     }
 }

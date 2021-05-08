@@ -18,7 +18,8 @@ namespace Repository
 
         public void Delete(ImageType item)
         {
-            throw new NotImplementedException();
+            context.ImageTypes.Remove(item);
+            context.SaveChanges();
         }
 
         public void Delete(string uid)
@@ -28,17 +29,17 @@ namespace Repository
 
         public ImageType Read(string uid)
         {
-            throw new NotImplementedException();
+            return context.ImageTypes.FirstOrDefault(t => t.UID == uid);
         }
 
         public IQueryable<ImageType> Read()
         {
-            throw new NotImplementedException();
+            return context.ImageTypes.AsQueryable();
         }
 
         public void Save()
         {
-            throw new NotImplementedException();
+            context.SaveChanges();
         }
 
         public void Update(string oldid, ImageType newitem)

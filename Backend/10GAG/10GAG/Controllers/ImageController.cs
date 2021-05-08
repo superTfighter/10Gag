@@ -21,7 +21,7 @@ namespace _10GAG.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Image> GetUsers()
+        public IEnumerable<Image> GetImages()
         {
             return logic.GetAllImages();
         }
@@ -30,6 +30,13 @@ namespace _10GAG.Controllers
         public void AddImage([FromBody] Image item)
         {
             logic.AddImage(item);
+        }
+
+
+        [HttpDelete("{uid}")]
+        public void DeleteImage(string uid)
+        {
+            logic.DeleteImage(uid);
         }
 
     }

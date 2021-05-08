@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-4"></div>
+
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+
+                <form #uploadForm="ngForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input required type="text" name="title" class="form-control" placeholder="Title of your post"
+                            [(ngModel)]="imageModel.title">
+                    </div>
+
+                    <div class="form-group">
+                        <input required disabled type="text" name="base64Image" class="form-control"
+                            placeholder="Your image" [(ngModel)]="imageModel.base64Image">
+                    </div>
+
+                    <div class="form-group">
+                        <input #imageInput type="file" accept="image/*" (change)="processImage(imageInput)">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Image Type</label><br>
+                        <select name="imageType" [(ngModel)]="imageModel.typeID">
+                            <option *ngFor="let type of imageTypes" value={{type.uid}}>{{type.title}}</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-4"></div>
+</div>
