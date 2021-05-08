@@ -12,17 +12,25 @@ import { LoginReponse } from '../login-reponse';
 export class LoginComponent implements OnInit {
 
   public userModel = new User();
+  public loggedIn: boolean = false;
 
   private http: HttpClient;
   private router: Router;
 
   constructor(http: HttpClient, route: ActivatedRoute, router: Router) {
 
+    this.http = http;
+    this.router = router;
     this.userModel.userName = "";
     this.userModel.password = "";
 
-    this.http = http;
-    this.router = router;
+    if (sessionStorage.getItem("token") != null) {
+
+      this.loggedIn = true;
+    } else {
+      this.loggedIn = false;
+    }
+
   }
 
   ngOnInit(): void {
@@ -38,8 +46,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/']);
 
       }, error => {
-          alert("Login failed");
-        });
+        alert("Login failed");
+      });
 
     }
     else {
