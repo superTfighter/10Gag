@@ -3,6 +3,6 @@ export class Image {
     public title: string;
     public base64Image: string;
     public rating: number;
-    public typeID: string;
+    public imageTypeID: string;
 
 }

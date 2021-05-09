@@ -33,5 +33,11 @@ namespace _10GAG.Controllers
         {
             logic.AddImageType(item);
         }
+
+        [HttpDelete("{uid}")]
+        public void DeleteImageType(string uid)
+        {
+            logic.DeleteImageType(uid);
+        }
     }
 }

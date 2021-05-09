@@ -8,7 +8,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { UploadComponent } from './upload/upload.component';
 import { AppRoutingModule } from './app-routing.module';
-import { RouterModule } from '@angular/router'
+import { RouterModule } from '@angular/router';
+import { ImageCategoriesComponent } from './image-categories/image-categories.component'
+import { DataTablesModule } from 'angular-datatables';
 
 
 @NgModule({
@@ -16,14 +18,16 @@ import { RouterModule } from '@angular/router'
     AppComponent,
     MainPageComponent,
     LoginComponent,
-    UploadComponent
+    UploadComponent,
+    ImageCategoriesComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    DataTablesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

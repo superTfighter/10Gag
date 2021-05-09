@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace _10GAG.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210507181026_alap")]
+    [Migration("20210509103439_alap")]
     partial class alap
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -149,13 +149,13 @@ namespace _10GAG.Migrations
                         {
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "64efca81-0e98-45ec-b77a-35f460e11f49",
+                            ConcurrencyStamp = "433da025-d6f1-4015-9e48-717675548d59",
                             Email = "lextomi@niif.hu",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "lextomi@niif.hu",
                             NormalizedUserName = "lextomi@niif.hu",
-                            PasswordHash = "AQAAAAEAACcQAAAAELmyrWWU8YU5Tu5QFlGWmus/6oA1qILjMHWxdXtvz10oH4IE/D+jg4TF5PGoGlC3cw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECvG0Y3o7cUtmqs6lnouQtaATnItPlNv6gyg/tNoCzHOi9O7wAgPjLHC5mj/mRgCmg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -344,7 +344,7 @@ namespace _10GAG.Migrations
 
             modelBuilder.Entity("Models.Image", b =>
                 {
-                    b.HasOne("Models.ImageType", null)
+                    b.HasOne("Models.ImageType", "ImageType")
                         .WithMany("Images")
                         .HasForeignKey("ImageTypeID");
                 });

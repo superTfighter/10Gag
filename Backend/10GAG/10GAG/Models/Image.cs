@@ -20,6 +20,7 @@ namespace Models
         public int Rating { get; set; }
 
         public string ImageTypeID { get; set; }
+        public virtual ImageType ImageType { get; set; }
 
     }
 }

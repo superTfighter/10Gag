@@ -38,7 +38,7 @@ export class UploadComponent implements OnInit {
 
       this.imageModel.title = "";
       this.imageModel.base64Image = "";
-      this.imageModel.typeID = "";
+      this.imageModel.imageTypeID = "";
 
       this.token = sessionStorage.getItem("token");
      
@@ -61,8 +61,11 @@ export class UploadComponent implements OnInit {
 
   onSubmit(): void {
 
-    if (this.imageModel.title != "" && this.imageModel.base64Image != "" && this.imageModel.typeID != "") {
+    if (this.imageModel.title != "" && this.imageModel.base64Image != "" && this.imageModel.imageTypeID != "") {
       this.imageModel.rating = 1;
+
+
+      console.log(this.imageModel);
 
       const headers = {
         'Content-Type': 'application/json',

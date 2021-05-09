@@ -1,5 +1,5 @@
-Kép törlés,(kész)
 Kép kategoriák
 Új kategória hozzáadása
+Kép törlés,(kész)
 Token validáció (kész)
 Kinézet ráncfelvarrás

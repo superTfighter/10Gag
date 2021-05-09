@@ -18,13 +18,18 @@ namespace Repository
 
         public void Delete(ImageType item)
         {
+            foreach(Image image in item.Images) 
+            {
+                context.Images.Remove(image);
+            }
+
             context.ImageTypes.Remove(item);
             context.SaveChanges();
         }
 
         public void Delete(string uid)
         {
-            throw new NotImplementedException();
+            Delete(Read(uid));
         }
 
         public ImageType Read(string uid)

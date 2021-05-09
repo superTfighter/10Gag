@@ -8,6 +8,8 @@ namespace Data
 {
     public class DatabaseContext : IdentityDbContext<IdentityUser>
     {
+        public DbSet<Image> Images { get; set; }
+        public DbSet<ImageType> ImageTypes { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> opt) : base(opt)
         {
@@ -59,19 +61,9 @@ namespace Data
                 UserId = "02174cf0–9412–4cfe-afbf-59f706d72cf6"
             });
 
-
-
-            //todo SET THE FUCKING FOREIGH KEY
-            //modelBuilder.Entity<Image>(entity =>
-            //{
-
-            //});
-
         }
 
 
-        public DbSet<Image> Images { get; set; }
-        public DbSet<ImageType> ImageTypes { get; set; }
-
+       
     }
 }

@@ -23,7 +23,7 @@
 
                     <div class="form-group">
                         <label>Image Type</label><br>
-                        <select name="imageType" [(ngModel)]="imageModel.typeID">
+                        <select name="imageType" [(ngModel)]="imageModel.imageTypeID">
                             <option *ngFor="let type of imageTypes" value={{type.uid}}>{{type.title}}</option>
                         </select>
                     </div>
