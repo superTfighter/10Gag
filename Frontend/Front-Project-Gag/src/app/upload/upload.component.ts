@@ -18,8 +18,7 @@ export class UploadComponent implements OnInit {
   public imageModel = new Image();
   public imageTypes = Array<ImageType>();
 
-  selectedFile: ImageSnippet;
-
+  private selectedFile: ImageSnippet;
   private http: HttpClient;
   private router: Router;
   private token: string;
@@ -53,7 +52,7 @@ export class UploadComponent implements OnInit {
         this.http.get<Array<ImageType>>("https://localhost:7766/imagetype", { headers }).subscribe(response => {
           this.imageTypes = response;
         });
-        
+
       } else {
         sessionStorage.removeItem('token');
         this.router.navigate(['/login']);

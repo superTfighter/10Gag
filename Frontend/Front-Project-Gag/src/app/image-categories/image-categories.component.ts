@@ -13,8 +13,6 @@ import { Subject } from 'rxjs';
 export class ImageCategoriesComponent implements OnInit {
 
   public ImageTypes: Array<ImageType>;
-  public dtOptions: DataTables.Settings = {};
-
   public ImageTypeModel: ImageType;
 
   private router: Router;
