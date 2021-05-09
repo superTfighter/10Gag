@@ -23,6 +23,7 @@ export class UploadComponent implements OnInit {
 
   private http: HttpClient;
   private router: Router;
+  private token: string;
 
   constructor(http: HttpClient, router: Router) {
 
@@ -38,8 +39,16 @@ export class UploadComponent implements OnInit {
       this.imageModel.title = "";
       this.imageModel.base64Image = "";
       this.imageModel.typeID = "";
+
+      this.token = sessionStorage.getItem("token");
+     
+      const headers = {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + this.token
+      };
+
       
-      this.http.get<Array<ImageType>>("https://localhost:7766/imagetype").subscribe(response => {
+      this.http.get<Array<ImageType>>("https://localhost:7766/imagetype",{headers}).subscribe(response => {
         this.imageTypes = response;
       });
 
@@ -55,10 +64,13 @@ export class UploadComponent implements OnInit {
     if (this.imageModel.title != "" && this.imageModel.base64Image != "" && this.imageModel.typeID != "") {
       this.imageModel.rating = 1;
 
-      console.log(this.imageModel);
+      const headers = {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + this.token
+      };
 
       //POST TO SERVER
-      this.http.post<Image>("https://localhost:7766/image", this.imageModel).subscribe(response => {
+      this.http.post<Image>("https://localhost:7766/image", this.imageModel,{headers}).subscribe(response => {
         this.router.navigate(['/']);
       });
     }

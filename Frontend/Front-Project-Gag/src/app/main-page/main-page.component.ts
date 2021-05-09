@@ -17,11 +17,15 @@ export class MainPageComponent implements OnInit {
   private _sanitizer: DomSanitizer;
 
   private router: Router;
+  private token: string;
 
 
   constructor(http: HttpClient, private sanitizer: DomSanitizer, router: Router) {
 
     this.router = router;
+    this._sanitizer = sanitizer;
+    this.http = http;
+    this.Images = Array<Image>();
 
     if (sessionStorage.getItem("token") == null) {
 
@@ -29,11 +33,15 @@ export class MainPageComponent implements OnInit {
 
     } else {
 
-      this._sanitizer = sanitizer;
-      this.http = http;
+      this.token = sessionStorage.getItem("token");
+     
+      const headers = {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + this.token
+      };
 
 
-      this.http.get<Array<Image>>("https://localhost:7766/image").subscribe(response => {
+      this.http.get<Array<Image>>("https://localhost:7766/image", {headers}).subscribe(response => {
         this.Images = response;
       });
     }
@@ -45,7 +53,12 @@ export class MainPageComponent implements OnInit {
 
   deleteButtonClick(id: string): void {
 
-    this.http.delete("https://localhost:7766/image/" + id).subscribe(response => {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + this.token
+    };
+
+    this.http.delete("https://localhost:7766/image/" + id,{headers}).subscribe(response => {
       window.location.reload();
 
     });
