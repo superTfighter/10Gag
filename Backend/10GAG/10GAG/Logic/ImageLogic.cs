@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Models;
+using System.IO;
+
 
 namespace Logic
 {
@@ -22,7 +24,7 @@ namespace Logic
         }
 
         public void AddImage(Image item) 
-        {
+        {         
             _imageRepository.Add(item);
         }
 

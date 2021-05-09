@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { ImageCategoriesComponent } from './image-categories/image-categories.component'
 import { DataTablesModule } from 'angular-datatables';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import { DataTablesModule } from 'angular-datatables';
     FormsModule,
     DataTablesModule
   ],
-  providers: [],
+  providers: [NgxImageCompressService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Image } from '../image';
 import { ImageType } from '../image-type';
 import { HttpClient } from '@angular/common/http';
-import { stringify } from 'querystring';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) { }
@@ -24,9 +23,11 @@ export class UploadComponent implements OnInit {
   private http: HttpClient;
   private router: Router;
   private token: string;
+  private now: Date;
 
   constructor(http: HttpClient, router: Router) {
 
+    this.now = new Date();
     this.http = http;
     this.router = router;
 
@@ -36,22 +37,27 @@ export class UploadComponent implements OnInit {
 
     } else {
 
-      this.imageModel.title = "";
-      this.imageModel.base64Image = "";
-      this.imageModel.imageTypeID = "";
+      if (new Date(sessionStorage.getItem("token_expiration")) > this.now) {
 
-      this.token = sessionStorage.getItem("token");
-     
-      const headers = {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + this.token
-      };
+        this.imageModel.title = "";
+        this.imageModel.base64Image = "";
+        this.imageModel.imageTypeID = "";
 
-      
-      this.http.get<Array<ImageType>>("https://localhost:7766/imagetype",{headers}).subscribe(response => {
-        this.imageTypes = response;
-      });
+        this.token = sessionStorage.getItem("token");
 
+        const headers = {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + this.token
+        };
+
+        this.http.get<Array<ImageType>>("https://localhost:7766/imagetype", { headers }).subscribe(response => {
+          this.imageTypes = response;
+        });
+        
+      } else {
+        sessionStorage.removeItem('token');
+        this.router.navigate(['/login']);
+      }
     }
 
   }
@@ -64,16 +70,13 @@ export class UploadComponent implements OnInit {
     if (this.imageModel.title != "" && this.imageModel.base64Image != "" && this.imageModel.imageTypeID != "") {
       this.imageModel.rating = 1;
 
-
-      console.log(this.imageModel);
-
       const headers = {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + this.token
       };
 
       //POST TO SERVER
-      this.http.post<Image>("https://localhost:7766/image", this.imageModel,{headers}).subscribe(response => {
+      this.http.post<Image>("https://localhost:7766/image", this.imageModel, { headers }).subscribe(response => {
         this.router.navigate(['/']);
       });
     }

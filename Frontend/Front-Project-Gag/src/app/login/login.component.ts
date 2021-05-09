@@ -16,9 +16,11 @@ export class LoginComponent implements OnInit {
 
   private http: HttpClient;
   private router: Router;
+  private now: Date;
 
   constructor(http: HttpClient, route: ActivatedRoute, router: Router) {
 
+    this.now = new Date();
     this.http = http;
     this.router = router;
     this.userModel.userName = "";
@@ -27,7 +29,13 @@ export class LoginComponent implements OnInit {
     if (sessionStorage.getItem("token") != null) {
 
       this.loggedIn = true;
+
+      if (new Date(sessionStorage.getItem("token_expiration")) < this.now) {
+        sessionStorage.removeItem('token');
+        this.loggedIn = false;
+      }
     } else {
+
       this.loggedIn = false;
     }
 
@@ -42,7 +50,11 @@ export class LoginComponent implements OnInit {
 
       //POST TO SERVER
       this.http.put<LoginReponse>("https://localhost:7766/auth", this.userModel).subscribe(response => {
+
+        console.log(response);
         sessionStorage.setItem("token", response.token);
+        sessionStorage.setItem("token_expiration", response.expiration);
+
         this.router.navigate(['/']);
 
       }, error => {

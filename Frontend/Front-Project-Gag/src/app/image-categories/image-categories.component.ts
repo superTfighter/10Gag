@@ -20,8 +20,11 @@ export class ImageCategoriesComponent implements OnInit {
   private router: Router;
   private token: string;
   private http: HttpClient;
+  private now: Date;
 
   constructor(http: HttpClient, router: Router) {
+
+    this.now = new Date();
 
     this.router = router;
     this.http = http;
@@ -36,16 +39,24 @@ export class ImageCategoriesComponent implements OnInit {
 
     } else {
 
-      this.token = sessionStorage.getItem("token");
+      if (new Date(sessionStorage.getItem("token_expiration")) > this.now) {
 
-      const headers = {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + this.token
-      };
+        this.token = sessionStorage.getItem("token");
 
-      this.http.get<Array<ImageType>>("https://localhost:7766/imagetype", { headers }).subscribe(response => {
-        this.ImageTypes = response;
-      });
+        const headers = {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + this.token
+        };
+
+        this.http.get<Array<ImageType>>("https://localhost:7766/imagetype", { headers }).subscribe(response => {
+          this.ImageTypes = response;
+        });
+
+      } else {
+        sessionStorage.removeItem('token');
+        this.router.navigate(['/login']);
+
+      }
 
     }
 

@@ -16,14 +16,16 @@ export class MainPageComponent implements OnInit {
 
   public Images: Array<Image>;
   public ImageTypes: Array<ImageType>;
-  
+
   private http: HttpClient;
   private _sanitizer: DomSanitizer;
   private router: Router;
   private token: string;
+  private now: Date;
 
   constructor(http: HttpClient, private sanitizer: DomSanitizer, router: Router) {
 
+    this.now = new Date();
     this.router = router;
     this._sanitizer = sanitizer;
     this.http = http;
@@ -36,22 +38,27 @@ export class MainPageComponent implements OnInit {
 
     } else {
 
-      this.token = sessionStorage.getItem("token");
 
-      const headers = {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + this.token
-      };
+      if (new Date(sessionStorage.getItem("token_expiration")) > this.now) {
 
-      this.http.get<Array<Image>>("https://localhost:7766/image", { headers }).subscribe(response => {
-        this.Images = response;
+        this.token = sessionStorage.getItem("token");
 
-        console.log(response);
-      });
+        const headers = {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + this.token
+        };
 
-      this.http.get<Array<ImageType>>("https://localhost:7766/imagetype", { headers }).subscribe(response => {
-        this.ImageTypes = response;
-      });
+        this.http.get<Array<Image>>("https://localhost:7766/image", { headers }).subscribe(response => {
+          this.Images = response;
+        });
+
+        this.http.get<Array<ImageType>>("https://localhost:7766/imagetype", { headers }).subscribe(response => {
+          this.ImageTypes = response;
+        });
+      } else {
+        sessionStorage.removeItem('token');
+        this.router.navigate(['/login']);
+      }
     }
   }
 

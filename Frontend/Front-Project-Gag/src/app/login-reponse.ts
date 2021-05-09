@@ -1,7 +1,6 @@
 export class LoginReponse {
 
     public token: string;
-    public expirationDate: Date;
-
-
+    public expiration: string;
+    
 }
